@@ -4,14 +4,18 @@ namespace NumbersToWords
 {
     public class NumberToWordsConverter
     {
-        private static readonly string number_zero = "Zero";
-        private static readonly string[] number_ones = { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-        private static readonly string[] number_teens = { "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
-        private static readonly string[] number_tens = { "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+        private static string number_zero = "Zero";
+        private static string[] number_ones = { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
+        private static string[] number_teens = { "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+        private static string[] number_tens = { "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
 
-       public string ConvertToWords(decimal number)
+        public string ConvertToWords(decimal number)
         {
             string result = "";
+            if (number == 0)
+            {
+                return number_zero;
+            }
             if (number < 0)
             {
                 result += "Negative ";
@@ -22,7 +26,14 @@ namespace NumbersToWords
             int decimalPart = (int)((number - wholePart) * 100);
 
             // Convert the whole part to words
-            result += ConvertNumber(new BigInteger(wholePart));
+            if (wholePart > 0)
+            {
+                result += ConvertNumber(new BigInteger(wholePart));
+            }
+            else
+            {
+                result += number_zero;
+            }
 
             // Convert the decimal part
             if (decimalPart > 0)
