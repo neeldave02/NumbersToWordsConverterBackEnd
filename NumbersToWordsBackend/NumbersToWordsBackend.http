@@ -1,0 +1,6 @@
+@NumbersToWordsBackend_HostAddress = http://localhost:5094
+
+### Convert Number to Words
+
+GET {{NumbersToWordsBackend_HostAddress}}/convert/123
+Accept: text/plain
